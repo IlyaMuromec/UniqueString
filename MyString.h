@@ -1,5 +1,10 @@
 #pragma once
 
+// Class MyString
+// Class MyString has a privite pointer on element of single list (Counter).
+// Feature of class is holding each string in only one exemplar. 
+// This feature provides bield-in class Counter that implements special single list
+
 class MyString
 {
 	Counter* m_pCounter;

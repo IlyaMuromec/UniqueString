@@ -10,6 +10,9 @@
 size_t Counter::m_curCounters=0; 
 Counter* Counter::pHead=nullptr;
 
+
+// -----------------------------------
+// Constructor with param
 Counter::Counter(const char* pStr): m_owners(1)
 {
 	m_pStr = new char [strlen(pStr)+1];
@@ -19,6 +22,8 @@ Counter::Counter(const char* pStr): m_owners(1)
 	m_pNext = nullptr;
 }
 
+// ----------------------------------
+// Destructor
 Counter::~Counter()
 {
 	delete m_pStr;
@@ -32,12 +37,12 @@ void Counter::AddOwner()
 void Counter::RemoveOwner()
 {
 	m_owners--;
-	if (m_owners == 0)
+	if (m_owners == 0) // for this case necessary delete unused string and glue list
 	{
 		if (this != Counter::pHead)
 		{
 			Counter* p = Counter::pHead; 
-			size_t tmp = Counter::m_curCounters-1;
+			size_t tmp = Counter::m_curCounters-1; 
 			
 			while (p->m_pNext != this)
 			{
@@ -53,7 +58,7 @@ void Counter::RemoveOwner()
 				p->m_pNext = nullptr; // for case when this is last node
 			}
 		}
-		else
+		else // (this == Counter::pHead)
 		{
 			if (Counter::m_curCounters>1)
 			{
@@ -65,6 +70,7 @@ void Counter::RemoveOwner()
 	}
 }
 
+// static method
 Counter* Counter::AddString(const char* pStr)
 {
 	Counter* p = pHead;
@@ -72,20 +78,20 @@ Counter* Counter::AddString(const char* pStr)
 
 	if (m_curCounters > 0)
 	{
-		while (p != nullptr) // enter
+		while (p != nullptr) // find same string
 		{
-			if (strcmp(p->m_pStr, pStr) == 0) // match 
+			if (strcmp(p->m_pStr, pStr) == 0) // in case of match  
 			{
-				p->AddOwner();
+				p->AddOwner(); // increase number owners
 				return p;
 			}
 			p_last = p;
 			p = p->m_pNext;
 		}
-		p_last->m_pNext = new Counter(pStr);
+		p_last->m_pNext = new Counter(pStr); // else create new node (string) at end of list
 		return p_last->m_pNext;
 	}
-	else
+	else // (m_curCounters==0)
 	{
 		pHead = new Counter(pStr);
 		return pHead;

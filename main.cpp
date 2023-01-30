@@ -8,11 +8,11 @@
 int main()
 {
 	// test class 
-
 	MyString s1("tyu"); // 1 string "tya"
 	MyString s2("zxc"); // 1 string "zxc"
 	MyString s3("abc"); // 1 string "abc"
 	MyString s4(s3.GetString()); // 2 strings "abc"
+	MyString s20(nullptr);
 	
 	MyString s5 = s3; // copy constructor, 3 strings "abc"
 	
