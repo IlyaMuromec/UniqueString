@@ -16,3 +16,5 @@ Also class Counter has static:
 - pointer on Counter 'pHead' as a start point of list;
 - variable type size_t 'm_curCounters' that contains number of node (strings) in list;
 - methos 'Counter* AddString(const char *)' for findind same string and creating new
+
+Topics studied: embedded objects, operator overloading, move semantics, static data of class, static methods
